@@ -46,8 +46,7 @@
         $obs = $_POST['txtObs'];
         $idEstado = $_POST['sltEstado'];
 
-        uploadFile($_FILES['fleFoto']);
-        die;
+        $foto = uploadFile($_FILES['fleFoto']);
 
 
         if ($nome == null || $rg == null || $cpf == null || $idEstado == null)
@@ -72,7 +71,8 @@
                     "email" => $email,
                     "obs" => $obs,
                     "id" => $id,
-                    "idEstado" => $idEstado
+                    "idEstado" => $idEstado,
+                    "foto" => $foto
 
                 );
                 

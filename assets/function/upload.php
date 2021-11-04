@@ -21,6 +21,8 @@
         $nomeArquivo = (string) null;
         $extensao = (string) null;
         $nomeArquivoCript = (string) null;
+        $arquivoTemp = (string) null;
+        $foto = (string) null;
 
         // Valida se o arquivo existe no array
         if ($fotoFile['size'] > 0 && $fotoFile['type'] != '') {
@@ -52,9 +54,27 @@
                     
                     */
                     
+                    // uniqid() - gera uma sequencia numerica com base nas configurações de hardware da maquina
+
+                    // time() - pega a hora:minuto:segundo atual
                     $nomeArquivoCript = md5($nomeArquivo.uniqid(time()));
-                    echo($nomeArquivoCript);
-                    die;
+                    
+                    // Monta um novo arquivo com a execução
+                    $foto = $nomeArquivoCript.'.'.$extensao;
+
+                    // Recebe o nome do arquivo temporario que foi gerado quando o apache recebeu o arquivo do form
+                    $arquivoTemp = $fotoFile['tmp_name'];
+
+                    // Pega um arquivo de um lugar e move para outro lugar
+                    if (move_uploaded_file($arquivoTemp, SRC.NOME_DIRETORIO_FILE.$foto)) {
+                        
+                        return $foto;
+
+                    } else {
+                        
+                        echo('Erro no upload do arquivo');
+
+                    }
 
                 } else {
 

@@ -245,12 +245,13 @@
     <div id="consultaDeDados">
         <table id="tblConsulta">
             <tr>
-                <td id="tblTitulo" colspan="5">
+                <td id="tblTitulo" colspan="6">
                     <h1> Consulta de Dados.</h1>
                 </td>
             </tr>
             <tr id="tblLinhas">
                 <td class="tblColunas destaque"> Nome </td>
+                <td class="tblColunas destaque"> Foto </td>
                 <td class="tblColunas destaque"> Celular </td>
                 <td class="tblColunas destaque"> Email </td>
                 <td class="tblColunas destaque"> Opções </td>
@@ -270,6 +271,9 @@
                 <tr id="tblLinhas">
                     <td class="tblColunas registros">
                         <?=$rsClientes['nome']?>
+                    </td>
+                    <td class="tblColunas registros">
+                        <img class="foto" src="<?=NOME_DIRETORIO_FILE.$rsClientes['foto']?>">
                     </td>
                     <td class="tblColunas registros">
                         <?=$rsClientes['celular']?>

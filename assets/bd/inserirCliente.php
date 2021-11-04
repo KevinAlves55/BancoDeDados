@@ -16,6 +16,7 @@ function inserir($arryClientes) {
     $sql = "insert into tblcliente(
         
         nome,
+        foto,
         rg,
         cpf,
         telefone,
@@ -27,6 +28,7 @@ function inserir($arryClientes) {
     values (
 
         '". $arryClientes['nome'] ."',
+        '".$arryClientes['foto']."',
         '". $arryClientes['rg'] ."',
         '". $arryClientes['cpf'] ."',
         '". $arryClientes['telefone'] ."',
