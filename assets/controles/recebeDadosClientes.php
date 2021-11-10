@@ -23,7 +23,7 @@
     $email = (string) null;
     $obs = (string) null;
     $idEstado = (int) null;
-
+    
     // Variável criada para guardar o nome da foto
     $foto = (string) null;
 
@@ -45,8 +45,21 @@
         $email = $_POST['txtEmail'];
         $obs = $_POST['txtObs'];
         $idEstado = $_POST['sltEstado'];
+        $nome = $_GET['nomeFoto'];
 
-        $foto = uploadFile($_FILES['fleFoto']);
+        if (strtoupper($_GET['modo']) == 'ATUALIZAR') {
+        
+            if ($_FILES['fleFoto']['name'] != null) {
+                
+                $foto = uploadFile($_FILES['fleFoto']);
+    
+            } else {
+                
+                $foto = $nome;
+    
+            }
+    
+        }
 
 
         if ($nome == null || $rg == null || $cpf == null || $idEstado == null)

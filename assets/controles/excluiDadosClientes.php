@@ -12,10 +12,19 @@
     require_once(SRC.'assets/bd/excluiCliente.php');
 
     $idCliente = $_GET['id'];
+    $caminhoFoto = $_GET['foto'];
 
-    if(excluir($idCliente))
-    echo(BD_MSG_EXCLUI);
-    else
-    echo("<script> alert('". BD_MSG_EXCLUI_ERRO ."'); window.history.back(); </script>");
+    if(excluir($idCliente)) {
+        
+        // Pegamos o arquivo da URL, o nome do diretorio e a variavel via GET para apagar o arquivo com a imagem junto
+        unlink(SRC.NOME_DIRETORIO_FILE.$caminhoFoto);
+        echo(BD_MSG_EXCLUI);
+        
+    }
+    else {
+        
+        echo("<script> alert('". BD_MSG_EXCLUI_ERRO ."'); window.history.back(); </script>");
+
+    }
 
 ?>

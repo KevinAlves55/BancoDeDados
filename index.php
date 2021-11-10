@@ -10,6 +10,7 @@
     $email = (string) null;
     $obs = (string) null;
     $id = (int) 0;
+    $foto = (int) null;
     
     // Variáveis para trazer os valores de estados
     $idEstado = (int) null;
@@ -44,6 +45,7 @@
         $id = $_SESSION['cliente']['idcliente'];
         $idEstado = $_SESSION['cliente']['idEstado'];
         $sigla = $_SESSION['cliente']['sigla'];
+        $foto = $_SESSION['cliente']['foto'];
         $modo = "Atualizar";
 
         // Elimina um objeto, varivel da memória
@@ -132,7 +134,7 @@
 
             OBS: Não é possível manipular o file com method GET
             -->
-            <form enctype="multipart/form-data" action="assets/controles/recebeDadosClientes.php?modo=<?=$modo?>&id=<?=$id?>" name="frmCadastro" method="post">
+            <form enctype="multipart/form-data" action="assets/controles/recebeDadosClientes.php?modo=<?=$modo?>&id=<?=$id?>&nomeFoto=<?=$foto?>" name="frmCadastro" method="post">
 
                 <div class="campos">
                     <div class="cadastroInformacoesPessoais">
@@ -148,6 +150,9 @@
                     </div>
                     <div class="cadastroEntradaDeDados">
                         <input type="file" accept="image/jpeg, image/jpg, image/png" name="fleFoto">
+                    </div>
+                    <div id="visualizarFoto">
+                        <img src="<?=NOME_DIRETORIO_FILE.$foto?>" alt="">
                     </div>
                 </div>
                 <div class="campos">
@@ -285,7 +290,7 @@
                     <td class="tblColunas registros">
                         <a href="assets/controles/editaDadosClientes.php?id=<?=$rsClientes['idcliente']?>"><img src="assets/img/edit.png" alt="Editar" title="Editar" class="editar"></a>
                         
-                        <a onclick="return confirm('Tem certeza que deseja excluir?');" href="assets/controles/excluiDadosClientes.php?id=<?=$rsClientes['idcliente']?>">
+                        <a onclick="return confirm('Tem certeza que deseja excluir?');" href="assets/controles/excluiDadosClientes.php?id=<?=$rsClientes['idcliente']?>&foto=<?=$rsClientes['foto']?>">
                             <img src="assets/img/trash.png" alt="Excluir" title="Excluir" class="excluir">
                         </a>
                         

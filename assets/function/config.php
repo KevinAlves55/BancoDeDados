@@ -31,7 +31,7 @@
 
     // Constantes para upload de Arquivos
     define('NOME_DIRETORIO_FILE', 'arquivos/');
-    $extencoesPermitidasFile = array('image/png', 'image/jpg/', 'image/jpeg');
+    $extencoesPermitidasFile = array('image/png', 'image/jpg', 'image/jpeg');
     define('EXTENCOES_PERMITIDAS', $extencoesPermitidasFile);
 
     const TAMANHO_ARQUIVO = '5120';
