@@ -10,7 +10,7 @@
     $email = (string) null;
     $obs = (string) null;
     $id = (int) 0;
-    $foto = (int) null;
+    $foto = (string) "semFoto.png";
     
     // Variáveis para trazer os valores de estados
     $idEstado = (int) null;

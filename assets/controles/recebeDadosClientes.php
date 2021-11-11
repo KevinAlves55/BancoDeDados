@@ -23,8 +23,6 @@
     $email = (string) null;
     $obs = (string) null;
     $idEstado = (int) null;
-    
-    // Variável criada para guardar o nome da foto
     $foto = (string) null;
 
     // Validação para saber se o id do registro está chegando
@@ -45,20 +43,25 @@
         $email = $_POST['txtEmail'];
         $obs = $_POST['txtObs'];
         $idEstado = $_POST['sltEstado'];
-        $nome = $_GET['nomeFoto'];
+        $nomeFoto = $_GET['nomeFoto'];
 
         if (strtoupper($_GET['modo']) == 'ATUALIZAR') {
         
-            if ($_FILES['fleFoto']['name'] != null) {
+            if ($_FILES['fleFoto']['name'] != '') {
                 
                 $foto = uploadFile($_FILES['fleFoto']);
+                unlink(SRC.NOME_DIRETORIO_FILE.$nomeFoto);
     
             } else {
                 
-                $foto = $nome;
+                $foto = $nomeFoto;
     
             }
     
+        } else {
+
+            $foto = uploadFile($_FILES['fleFoto']);
+
         }
 
 
@@ -103,9 +106,10 @@
                 
                 elseif(strtoupper($_GET['modo']) == 'ATUALIZAR') {
 
-                    if(editar($clientes)){
+                    if(editar($clientes))
                     echo("<script> alert('". BD_MSG_INSERIR ."'); window.location.href = '../../index.php';</script>");
-                    } else
+                    
+                    else
                     echo("<script> alert('". BD_MSG_ERRO ."'); window.history.back(); </script>");
 
                 }

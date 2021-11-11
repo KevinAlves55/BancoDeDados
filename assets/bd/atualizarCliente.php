@@ -14,6 +14,7 @@
     function editar ($arryClientes) {
 
         $sql = "update tblcliente set 
+            
             nome = '".$arryClientes['nome']."',
             rg = '".$arryClientes['rg']."',
             cpf = '".$arryClientes['cpf']."',
@@ -21,7 +22,8 @@
             telefone = '".$arryClientes['telefone']."',
             celular = '".$arryClientes['celular']."',
             email = '".$arryClientes['email']."',
-            obs = '".$arryClientes['obs']."'
+            obs = '".$arryClientes['obs']."',
+            foto = '".$arryClientes['foto']."'
 
         where idcliente = ".$arryClientes['id'];
 

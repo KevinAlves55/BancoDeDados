@@ -35,6 +35,10 @@
             <td><?=$dadosClientes['email']?></td>
         </tr>
         <tr>
+            <td>Imagem: </td>
+            <td><img src="<?=NOME_DIRETORIO_FILE.$dadosClientes['foto']?>" alt=""></td>
+        </tr>
+        <tr>
             <td>Celular</td>
             <td><?=$dadosClientes['celular']?></td>
         </tr>
