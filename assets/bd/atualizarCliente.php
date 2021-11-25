@@ -9,7 +9,7 @@
 *************************************************/
 
 // Arquivo de conexão do Banco
-    require_once('../bd/conexaoSql.php');
+    require_once(SRC.'assets/bd/conexaoSql.php');
 
     function editar ($arryClientes) {
 

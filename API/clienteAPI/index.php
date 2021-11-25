@@ -163,34 +163,163 @@
     });
 
     // EndPoint : PUT, Atualiza um cliente no BD
-    $app -> put('/clientes', function($request, $response, $args) {
+    $app -> put('/clientes/{id}', function($request, $response, $args) {
 
-        return $response  
-        -> withStatus(201) 
-        -> withHeader('Content-Type', 'application/json') 
-        -> write (
+        // Recebe o contentType do header, para verificar se o padrão do body será Json
+        $contentType = $request -> getHeaderLine('Content-Type');
+
+        // Valida se o tipo de dados é Json
+        if ($contentType == 'application/json') {
+
+            // Recebe o conteudo enviado no body da mensagem
+            $dadosBodyJSON = $request -> getParsedBody();
+
+            // Valida se o corpo do body está vazio
+            if ($dadosBodyJSON == '' || $dadosBodyJSON == null || !isset($args['id']) || !is_numeric($args['id'])) {
+                
+                return $response  
+                -> withStatus(406) 
+                -> withHeader('Content-Type', 'application/json') 
+                -> write (
+                    
+                    '{
+                        "message":"Conteúdo enviado pelo body não contém dados"
+                    }'
+                
+                );
+
+            } else {
+
+                // Recebe o id que será enviado pela URL
+                $id = $args['id'];
+
+                require_once('../assets/function/config.php');
+                require_once('../assets/controles/recebeDadosClienteAPI.php');
+                
+                // Envia os dados e valida se foi inserido com sucesso
+                if(atualizarClienteAPI($dadosBodyJSON, $id)) {
+
+                    return $response  
+                    -> withStatus(200) 
+                    -> withHeader('Content-Type', 'application/json') 
+                    -> write (
+                        
+                        '{
+                            "message":"Item atualizado com sucesso"
+                        }'
+                    
+                    );
+
+                } else {
+
+                    return $response  
+                    -> withStatus(400) 
+                    -> withHeader('Content-Type', 'application/json') 
+                    -> write (
+                        
+                        '{
+                            "message":"Não foi possível salvar os dados, por favor verificar o body da mensagem"
+                        }'
+                    
+                    );
+
+                }
+
+            }    
+
+        } else {
+
+            return $response  
+            -> withStatus(406) 
+            -> withHeader('Content-Type', 'application/json') 
+            -> write (
+                
+                '{
+                    "message":"Formato de dados do header, inconpatível com o padrão JSON"
+                }'
             
-            '{
-                "message":"Item atualizado com sucesso"
-            }'
-        
-        );
+            );
+
+        }
 
     });
 
     // EndPoint : Delete, Exclui um cliente do BD
-    $app -> delete('/clientes', function($request, $response, $args) {
+    $app -> delete('/clientes/{id}', function($request, $response, $args) {
 
-        return $response  
-        -> withStatus(200) 
-        -> withHeader('Content-Type', 'application/json') 
-        -> write (
+        // Recebe o contentType do header, para verificar se o padrão do body será Json
+        $contentType = $request -> getHeaderLine('Content-Type');
+
+        // Valida se o tipo de dados é Json
+        if ($contentType == 'application/json') {
+
+            // Valida se o corpo do body está vazio
+            if (!isset($args['id']) || !is_numeric($args['id'])) {
+
+                return $response  
+                -> withStatus(406) 
+                -> withHeader('Content-Type', 'application/json') 
+                -> write (
+                    
+                    '{
+                        "message":"Conteúdo enviado pelo body não contém dados"
+                    }'
+                
+                );
+
+            } else {
+
+                // Recebe o id que será enviado pela URL
+                $id = $args['id'];
+
+                require_once('../assets/function/config.php');
+                require_once('../assets/controles/recebeDadosClienteAPI.php');
+                
+                // Envia os dados e valida se foi inserido com sucesso
+                if(deletarClienteAPI($id)) {
+
+                    return $response  
+                    -> withStatus(200) 
+                    -> withHeader('Content-Type', 'application/json') 
+                    -> write (
+                        
+                        '{
+                            "message":"Item deletado com sucesso"
+                        }'
+                    
+                    );
+
+                } else {
+
+                    return $response  
+                    -> withStatus(400) 
+                    -> withHeader('Content-Type', 'application/json') 
+                    -> write (
+                        
+                        '{
+                            "message":"Não foi possível executar essa função"
+                        }'
+                    
+                    );
+
+                }
+
+            }    
+
+        } else {
+
+            return $response  
+            -> withStatus(406) 
+            -> withHeader('Content-Type', 'application/json') 
+            -> write (
+                
+                '{
+                    "message":"Formato de dados do header, inconpatível com o padrão JSON"
+                }'
             
-            '{
-                "message":"Item excluido com sucesso"
-            }'
-        
-        );
+            );
+
+        }
 
     });
 
