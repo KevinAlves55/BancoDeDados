@@ -14,7 +14,10 @@
     function listar () {
 
         // Comando para rodar o select
-        $sql = "select * from tblcliente order by idcliente desc";
+        $sql = "select tblCliente.*, tblEstado.sigla 
+            from tblCliente
+        inner join tblEstado
+        on tblEstado.idEstado = tblCliente.idEstado order by idcliente desc";
 
         // Abre a conexão com o BD
         $conexao = conexaoMysql();

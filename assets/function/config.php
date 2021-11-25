@@ -2,11 +2,12 @@
 
 /***********************************************************************************************
 
-    Obejetivo: Arquivo de consiguração de variáveis e constantes que serão utilizadas no sistema
-    Data: 15/09/2021
-    Autor: Kevin
+    // Obejetivo: Arquivo de consiguração de variáveis e constantes que serão utilizadas no sistema
+    // Data: 15/09/2021
+    // Autor: Kevin
 
 *************************************************************************************************/
+
     // Constante para indicar a pasta raiz do servidor mais a estrutura de diretórios até o meu projeto
     define ('SRC' , $_SERVER['DOCUMENT_ROOT'] . '/ds2t20212/Kevin/AULA11/');
     
