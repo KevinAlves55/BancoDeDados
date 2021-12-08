@@ -28,6 +28,15 @@ function buscarClientes($id) {
 
 }
 
+// Função para buscar dados do BD com filtro pelo nome (API)
+function buscarNomeCliente($nome) {
+
+    $dados = buscarNome($nome);
+
+    return $dados;
+
+}
+
 function criarArray($objeto) {
 
     // Estrutura de repetição para pegar um objeto de dados e converter em um array

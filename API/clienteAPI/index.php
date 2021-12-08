@@ -30,10 +30,23 @@
         require_once('../assets/function/config.php');
         require_once('../assets/controles/exibiDadosClientes.php');
 
-        // Chama a função (na pasta controles) que vai requisitar os dados do BD
-        if ($listDados = exibirClientes())
-        if($listDadosArray = criarArray($listDados))
-        $listDadosJSON = criarJSON($listDadosArray);
+        if (isset($request -> getQueryParams()['nome'])) {
+            
+            /* Recebendo dados pela queryString */
+            $nome = (string) null;
+            $nome = $request -> getQueryParams()['nome'];
+
+            if ($listDados = buscarNomeCliente($nome))
+            if($listDadosArray = criarArray($listDados))
+            $listDadosJSON = criarJSON($listDadosArray);
+        
+        } else {
+
+            // Chama a função (na pasta controles) que vai requisitar os dados do BD
+            if ($listDados = exibirClientes())
+            if($listDadosArray = criarArray($listDados))
+            $listDadosJSON = criarJSON($listDadosArray);
+        }
 
         // Validação para tratar BD sem dados
         if ($listDadosArray) {
